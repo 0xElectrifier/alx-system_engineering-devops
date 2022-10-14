@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-#while loop statement
+# Prints 'Best School' 10 times iteratively using a while loop
 
-x='1'
-while [ $x -le 10 ]
-	do
-		echo "Best School"
-		((x++))
+i=1
+while [ $i -le 10 ];
+do
+	echo "Best School"
+	((i++))
 done
