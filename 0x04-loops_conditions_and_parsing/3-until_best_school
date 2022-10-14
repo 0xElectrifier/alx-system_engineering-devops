@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-#until statement
+# Displays 'Best School' 10 times iteratively, using until loop
 
-x=10
-until [ $x -le 0 ]
+i=1
+until [ $i -ge 10 ]
 do
-	echo 'Best School'
-	((x--))
+	echo "Best School"
+	((i++))
 done
