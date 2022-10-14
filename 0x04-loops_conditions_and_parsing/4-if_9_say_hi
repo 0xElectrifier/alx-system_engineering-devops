@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-#say hi on 9th line using while and if statement
+# Displays 'Best School' 10 times iteratively, but displays 'Hi' for the
+# 9th iteration.
 
-x='0'
-while [ $x -le 10 ]
+i=1
+while [ $i -le 10 ];
 do
-	if [ $x = 9 ]
+	if [ $i == 9 ]
 	then
 		echo "Hi"
 	else
 		echo "Best School"
 	fi
-	((x++))
+	((i++))
 done
