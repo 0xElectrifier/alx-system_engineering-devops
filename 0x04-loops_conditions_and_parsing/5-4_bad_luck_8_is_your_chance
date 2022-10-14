@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# display bad luck in 4th loop, good luck on 8th loop and Best School for other iterations using while and if, elif and else statements
+
+x='0'
+while [ $x -lt 10 ]
+do
+	if [ $x = 3 ]
+	then
+		echo 'bad luck'
+	elif [ $x = 7 ]
+	then
+		echo 'good luck'
+	else
+		echo 'Best School'
+	fi
+	((x++))
+done

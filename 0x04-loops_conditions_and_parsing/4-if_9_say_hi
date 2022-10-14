@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#say hi on 9th line using while and if statement
+
+x='0'
+while [ $x -le 10 ]
+do
+	if [ $x = 9 ]
+	then
+		echo "Hi"
+	else
+		echo "Best School"
+	fi
+	((x++))
+done
