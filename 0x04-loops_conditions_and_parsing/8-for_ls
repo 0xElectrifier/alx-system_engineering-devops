@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-#displays content of current directory in a list format using for loop
+# Displays:
+#	The content of the current directory
+#	In a list format
+#	Where only the part of the name after the first dash is displayed
 
-x=$(ls)
-for x in $x
+for i in `ls .`;
 do
-       	echo "$x" | cut -d "-" -f2
+	echo "$i" | cut -d "-" -f 2-
 done
