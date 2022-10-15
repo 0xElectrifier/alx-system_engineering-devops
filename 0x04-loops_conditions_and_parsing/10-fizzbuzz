@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-#display numbers from 1 to 100
+# Displays the 'FizzBuzz' number sequence
 
-for x in {1..100}
+for ((i=1; i<=100; i++))
 do
-	if (( x % 15 == 0 ))
+	if [[ $(($i % 5)) == "0" && $(($i % 3)) == "0" ]];
 	then
-	echo "FizzBuzz"
-elif (( x % 3 == 0 ))
+		echo "FizzBuzz"
+	elif [ $(($i % 3)) == "0" ];
 	then
-	echo "Fizz"
-elif (( x % 5 == 0 ))
+		echo "Fizz"
+	elif [ $(($i % 5)) == "0" ];
 	then
-	echo "Buzz"
+		echo "Buzz"
 	else
-	       	echo "$x"
+		echo "$i"
 	fi
 done
