@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Installs 'nginx' on your server with the following requirement
+#	- Listens to port 80
+#	- Returns a page containing the string 'Hello World' when querying
+#	  it root directory
+
+# Update the package list from all configured sources
+apt-get update;
+# Install the 'nginx' from apt store
+apt-get install nginx -y;
+
+mkdir -p /var/www/html
+echo "Hello World!" >> /var/www/html/index.html
+
+echo "server {
+	listen 80;
+	listen [::}:80;
+
+	root /var/www/html;
+	index.html
+}" > /etc/nginx/sites-available/default
