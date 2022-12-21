@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
 # ----- RUN SCRIPT AS SUPER USER -----
 # Installs 'nginx' on your server with the following requirements
 #	- Listens to port 80
@@ -23,7 +24,7 @@ echo "server {
 	index index.html;
 
 	server_name _;
-	add_header X-Served-By $(eval hostname);
+	add_header X-Served-By $HOSTNAME;
 	location / {
 		try_files \$uri \$uri/ =404;
 	}
