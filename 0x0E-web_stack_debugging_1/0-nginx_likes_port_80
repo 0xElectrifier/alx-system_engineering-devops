@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/env bash
 sudo sed -i 's/listen 8080/listen 80/' /etc/nginx/sites-enabled/default;
 sudo sed -i 's/listen \[::\]:8080/listen [::]:80/' /etc/nginx/sites-enabled/default;
 sudo service nginx restart;
