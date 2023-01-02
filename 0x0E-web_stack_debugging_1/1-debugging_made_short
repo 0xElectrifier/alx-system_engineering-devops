@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Shorter version of '0-nginx_likes_port_80' that debugs a web server
-sudo rm -rf /etc/nginx/sites-enabled
-sudo ln -s /etc/nginx/sites-available /etc/nginx/sites-enabled
-
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+service nginx restart
+echo "" > /run/nginx.pid
