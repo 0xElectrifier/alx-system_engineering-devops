@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Script that debugs a web server that can't listen to port 80
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled
-service nginx restart
+sudo rm -rf /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available /etc/nginx/sites-enabled;
+sudo service nginx restart;
