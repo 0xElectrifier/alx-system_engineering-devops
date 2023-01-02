@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Configure nginx and stop service
-sudo sed -i 's/8080 default_server/80 default_server/g' /etc/nginx/sites-enabled/default
-sudo service nginx restart
-sudo rm /var/run/nginx.pid
+# Shorter version of '0-nginx_likes_port_80' that debugs a web server
+sudo rm -rf /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available /etc/nginx/sites-enabled
+
