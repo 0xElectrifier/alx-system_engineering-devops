@@ -1,0 +1,8 @@
+#!/bin/bash
+# Sets up a server firewall using 'ufw' to block all incoming traffic,
+# except on TCP port 22, 443 and 80
+ufw default deny incoming;
+ufw allow in 22/tcp;
+ufw allow http;
+ufw allow https;
+ufw enable -y;
