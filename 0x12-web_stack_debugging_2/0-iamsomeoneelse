@@ -2,10 +2,10 @@
 # Runs the 'whoami' command on the first argument
 if [[ -n $1 ]]
 then
-	user_name=$(cut -d ":" -f1 < /etc/passwd | grep $1)
+	user_name=$(cut -d ":" -f1 < /etc/passwd | grep "$1")
 	if [[ -n $user_name ]]
 	then
-		echo $1;
+		echo "$1";
 	fi
 	exit 0;
 fi
