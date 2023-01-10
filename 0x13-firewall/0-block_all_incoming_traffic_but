@@ -5,6 +5,7 @@ apt-get update && apt-get install ufw -y;
 ufw default deny incoming;
 ufw default allow outgoing;
 ufw allow in 22/tcp;
-ufw allow http;
-ufw allow https;
+ufw allow 80/tcp;
+ufw allow 443/tcp;
 ufw enable -y;
+
