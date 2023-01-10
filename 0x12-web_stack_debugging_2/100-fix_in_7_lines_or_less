@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Script that makes nginx web server listen on port 8080 and
-# making nginx server run as Nginx user
+# Script that makes nginx web server listen on port 8080 instead of 80
 sed -i "s/#user www-data/user nginx/g" /etc/nginx/nginx.conf
 sed -i "s/80/8080/g" /etc/nginx/sites-available/default
 chmod 644 /etc/nginx/nginx.conf
