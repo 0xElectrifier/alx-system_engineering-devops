@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Runs the 'whoami' command on the first argument
+if [[ -n $1 ]]
+then
+	user_name=$(cat /etc/passwd | cut -d ":" -f1 | grep $1)
+	if [[ -n $user_name ]]
+	then
+		echo $1;
+	fi
+	exit 0;
+fi
+
+whoami;
+
