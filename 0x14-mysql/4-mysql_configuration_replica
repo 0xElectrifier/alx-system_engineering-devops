@@ -1,0 +1,21 @@
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+log-error       = /var/log/mysql/error.log
+
+# By default we only accept connections from localhost
+bind-address    = 127.0.0.1
+
+# Server id of this replica database
+server-id       = 2
+
+# Extra config to match source configuration
+log_bin         = /var/log/mysql/mysql-bin.log
+binlog_do_db    = tyrell_corp
+
+# Location of replica relay log file
+relay-log       = /var/log/mysql/mysql-relay-bin.log
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
