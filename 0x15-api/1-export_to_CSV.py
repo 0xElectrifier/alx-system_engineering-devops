@@ -24,7 +24,7 @@ if __name__ == '__main__':
         response = json.loads(res.read().decode())
 
     with open('USER_ID.csv', 'w') as f:
-        csvfile = csv.writer(f)
+        csvfile = csv.writer(f, quoting=csv.QUOTE_ALL)
         for task in response:
             csvfile.writerow([employee_id,
                 username,
