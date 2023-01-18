@@ -2,8 +2,8 @@
 """Fetching data from 'JSONPlaceHolder' API using an employee's ID,
 returns information about that employee's TODO list progress
 """
-from sys import argv
 import json
+from sys import argv
 from urllib import parse
 from urllib import request
 
