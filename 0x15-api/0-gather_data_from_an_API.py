@@ -2,10 +2,10 @@
 """Fetching data from 'JSONPlaceHolder' API using an employee's ID,
 returns information about that employee's TODO list progress
 """
-import json
 from sys import argv
-from urllib import request
 from urllib import parse
+from urllib import request
+import json
 
 
 if __name__ == '__main__':
@@ -38,8 +38,8 @@ if __name__ == '__main__':
     for task in response:
         if task.get('completed') is True:
             task_done += 1
-    print("Employee {} is done with tasks({}/{}):)".format(name,
+    print("Employee {} is done with tasks({}/{}):".format(name,
                                                            task_done,
                                                            total_task))
     for task in response:
-        print("\t{}".format(task.get('title')))
+        print("\t {}".format(task.get('title')))
