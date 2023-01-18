@@ -3,15 +3,16 @@
 returns information about that employee's TODO list progress
 """
 from sys import argv
+import json
 from urllib import parse
 from urllib import request
-import json
 
 
 if __name__ == '__main__':
     employee_id = int(argv[1])
     # Fetch employee name first
     user_url = 'https://jsonplaceholder.typicode.com/users/'
+    todo_url = 'https://jsonplaceholder.typicode.com/todos/'
     # Encode query string
     query_str = parse.urlencode({'id': employee_id})
     # Format url + query string
@@ -23,7 +24,6 @@ if __name__ == '__main__':
         name = response[0].get('name')
 
     # Fetch tasks data
-    todo_url = 'https://jsonplaceholder.typicode.com/todos/'
     # Encode query string
     query_str = parse.urlencode({'userId': employee_id})
     # Format url + query string
@@ -39,7 +39,8 @@ if __name__ == '__main__':
         if task.get('completed') is True:
             task_done += 1
     print("Employee {} is done with tasks({}/{}):".format(name,
-                                                           task_done,
-                                                           total_task))
+                                                          task_done,
+                                                          total_task))
     for task in response:
-        print("\t {}".format(task.get('title')))
+        if task.get('completed') is True:
+            print("\t {}\n".format(task.get('title')), end="")
