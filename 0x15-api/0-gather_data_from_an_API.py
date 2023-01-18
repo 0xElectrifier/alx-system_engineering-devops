@@ -1,33 +1,45 @@
 #!/usr/bin/python3
+"""Fetching data from 'JSONPlaceHolder' API using an employee's ID,
+returns information about that employee's TODO list progress
 """
-Using https://jsonplaceholder.typicode.com
-returns info about employee TODO progress
-Implemented using recursion
-"""
-import re
-import requests
-import sys
-
-
-API = "https://jsonplaceholder.typicode.com"
-"""REST API url"""
+import json
+from sys import argv
+from urllib import request
+from urllib import parse
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        if re.fullmatch(r'\d+', sys.argv[1]):
-            id = int(sys.argv[1])
-            user_res = requests.get('{}/users/{}'.format(API, id)).json()
-            todos_res = requests.get('{}/todos'.format(API)).json()
-            user_name = user_res.get('name')
-            todos = list(filter(lambda x: x.get('userId') == id, todos_res))
-            todos_done = list(filter(lambda x: x.get('completed'), todos))
-            print(
-                'Employee {} is done with tasks({}/{}):'.format(
-                    user_name,
-                    len(todos_done),
-                    len(todos)
-                )
-            )
-            for todo_done in todos_done:
-                print('\t {}'.format(todo_done.get('title')))
+    employee_id = int(argv[1])
+    # Fetch employee name first
+    user_url = 'https://jsonplaceholder.typicode.com/users/'
+    # Encode query string
+    query_str = parse.urlencode({'id': employee_id})
+    # Format url + query string
+    user_url = user_url + '?' + query_str
+    with request.urlopen(user_url) as user_res:
+        response = user_res.read().decode()
+        # Deserialize str object into it json format
+        response = json.loads(response)
+        name = response[0].get('name')
+
+    # Fetch tasks data
+    todo_url = 'https://jsonplaceholder.typicode.com/todos/'
+    # Encode query string
+    query_str = parse.urlencode({'userId': employee_id})
+    # Format url + query string
+    todo_url = todo_url + '?' + query_str
+    with request.urlopen(todo_url) as todo_res:
+        response = todo_res.read().decode()
+        response = json.loads(response)
+
+    total_task = len(response)
+    # Check number of tasks completed
+    task_done = 0
+    for task in response:
+        if task.get('completed') == True:
+            task_done += 1
+    print("Employee {} is done with tasks({}/{})".format(name,
+                                                        task_done,
+                                                        total_task))
+    for task in response:
+        print("\t{}".format(task.get('title')))
