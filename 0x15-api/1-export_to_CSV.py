@@ -1,33 +1,32 @@
 #!/usr/bin/python3
+"""Script that writes to a csv file, all tasks that are owned by an employee
 """
-Using https://jsonplaceholder.typicode.com
-gathers data from API and exports it to CSV file
-Implemented using recursion
-"""
-import re
-import requests
+import csv
+import json
 import sys
-
-
-API = "https://jsonplaceholder.typicode.com"
-"""REST API url"""
+from urllib import request
+from urllib import parse
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        if re.fullmatch(r'\d+', sys.argv[1]):
-            id = int(sys.argv[1])
-            user_res = requests.get('{}/users/{}'.format(API, id)).json()
-            todos_res = requests.get('{}/todos'.format(API)).json()
-            user_name = user_res.get('username')
-            todos = list(filter(lambda x: x.get('userId') == id, todos_res))
-            with open('{}.csv'.format(id), 'w') as file:
-                for todo in todos:
-                    file.write(
-                        '"{}","{}","{}","{}"\n'.format(
-                            id,
-                            user_name,
-                            todo.get('completed'),
-                            todo.get('title')
-                        )
-                    )
+    user_url = 'https://jsonplaceholder.typicode.com/users/'
+    todo_url = 'https://jsonplaceholder.typicode.com/todos/'
+    employee_id = sys.argv[1]
+
+    user_url = user_url + '?' + parse.urlencode({'id': employee_id})
+    with request.urlopen(user_url) as res:
+        response = json.loads(res.read().decode())
+        name = response[0].get('name')
+        username = response[0].get('username')
+
+    with request.urlopen(todo_url) as res:
+        response = json.loads(res.read().decode())
+
+    todo_url = todo_url + '?' + parse.urlencode({'userId': employee_id})
+    with open('USER_ID.csv', 'w') as f:
+        csvfile = csv.writer(f)
+        for task in response:
+            csvfile.writerow([employee_id,
+                username,
+                task.get('completed'),
+                task.get('title')])
