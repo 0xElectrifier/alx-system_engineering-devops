@@ -36,10 +36,10 @@ if __name__ == '__main__':
     # Check number of tasks completed
     task_done = 0
     for task in response:
-        if task.get('completed') == True:
+        if task.get('completed') is True:
             task_done += 1
-    print("Employee {} is done with tasks({}/{})".format(name,
-                                                        task_done,
-                                                        total_task))
+    print("Employee {} is done with tasks({}/{}):)".format(name,
+                                                           task_done,
+                                                           total_task))
     for task in response:
         print("\t{}".format(task.get('title')))
