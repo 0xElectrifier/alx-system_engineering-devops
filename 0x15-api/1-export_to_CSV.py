@@ -19,10 +19,10 @@ if __name__ == '__main__':
         name = response[0].get('name')
         username = response[0].get('username')
 
+    todo_url = todo_url + '?' + parse.urlencode({'userId': employee_id})
     with request.urlopen(todo_url) as res:
         response = json.loads(res.read().decode())
 
-    todo_url = todo_url + '?' + parse.urlencode({'userId': employee_id})
     with open('USER_ID.csv', 'w') as f:
         csvfile = csv.writer(f)
         for task in response:
