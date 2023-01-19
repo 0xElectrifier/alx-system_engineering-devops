@@ -9,9 +9,9 @@ from urllib import parse
 
 
 if __name__ == '__main__':
-    user_url = 'https://jsonplaceholder.typicode.com/users/'
-    todo_url = 'https://jsonplaceholder.typicode.com/todos/'
-    employee_id = sys.argv[1]
+    user_url = 'https://jsonplaceholder.typicode.com/users'
+    todo_url = 'https://jsonplaceholder.typicode.com/todos'
+    employee_id = int(sys.argv[1])
 
     user_url = user_url + '?' + parse.urlencode({'id': employee_id})
     with request.urlopen(user_url) as res:
@@ -27,6 +27,6 @@ if __name__ == '__main__':
         csvfile = csv.writer(f, quoting=csv.QUOTE_ALL)
         for task in response:
             csvfile.writerow([employee_id,
-                username,
-                task.get('completed'),
-                task.get('title')])
+                              username,
+                              task.get('completed'),
+                              task.get('title')])
