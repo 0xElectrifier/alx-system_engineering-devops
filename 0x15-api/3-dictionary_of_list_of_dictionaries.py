@@ -1,33 +1,30 @@
 #!/usr/bin/python3
-"""
-Using https://jsonplaceholder.typicode.com
-gathers data from API and exports it to JSON file
-Implemented using recursion
+"""Extension of task #0, exports data in JSON format
+Records all tasks from all employees
 """
 import json
-import requests
-
-
-API = "https://jsonplaceholder.typicode.com"
-"""REST API url"""
+import sys
+from urllib import request
+from urllib import parse
 
 
 if __name__ == '__main__':
-    users_res = requests.get('{}/users'.format(API)).json()
-    todos_res = requests.get('{}/todos'.format(API)).json()
-    users_data = {}
-    for user in users_res:
-        id = user.get('id')
-        user_name = user.get('username')
-        todos = list(filter(lambda x: x.get('userId') == id, todos_res))
-        user_data = list(map(
-            lambda x: {
-                'username': user_name,
-                'task': x.get('title'),
-                'completed': x.get('completed')
-            },
-            todos
-        ))
-        users_data['{}'.format(id)] = user_data
+    url = 'https://jsonplaceholder.typicode.com/'
+
+    with request.urlopen(url + 'users') as users:
+        users = json.loads(users.read().decode())
+
+    all_data = {}
+    for user in users:
+        username = user.get('username')
+        user_id = str(user.get('id'))
+        with request.urlopen(url + 'todos?userId=' + user_id) as todo_res:
+            todo_res = json.loads(todo_res.read().decode())
+        # Fetch list of a user's tasks
+        user_data = [{"username": username,
+                      "task": task.get('title'),
+                      "completed": task.get('completed')} for task in todo_res]
+        all_data[user_id] = user_data
+
     with open('todo_all_employees.json', 'w') as file:
-        json.dump(users_data, file)
+        json.dump(all_data, file)
