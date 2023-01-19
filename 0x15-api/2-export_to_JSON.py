@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     json_data = {}
     json_data[employee_id] = [{"task": task.get('title'),
-        "completed": task.get('completed'),
-        "username": username} for task in response]
+                               "completed": task.get('completed'),
+                               "username": username} for task in response]
     with open(employee_id + '.json', 'w') as file:
         json.dump(json_data, file)
